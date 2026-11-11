@@ -1,18 +1,21 @@
 /* ============================================================
-   Wedding invitation — olive & gold theme
+   Wedding invitation — aubergine & gold theme
+
+   Every colour comes from the tokens below. To re-theme the whole invitation,
+   change these eight values; nothing else hardcodes a theme colour.
    ============================================================ */
 
 :root {
-  --olive-dark:  #3F4A3C;
-  --olive:       #5A6B56;
-  --sage:        #7E9079;
-  --gold:        #C5A059;
+  --plum-dark:   #39304B;   /* deep sections: countdown, thank you, intro */
+  --plum:        #574A72;   /* buttons, emblems */
+  --lilac:       #8678A3;   /* soft accents */
+  --gold:        #C5A059;   /* the accent throughout */
   --gold-light:  #E8D7B0;
   --gold-dark:   #967533;
-  --ivory:       #FBF9F5;
-  --cream:       #F4EFE6;
-  --ink:         #2A2E28;
-  --shadow-soft: 0 18px 45px rgba(42, 46, 40, .14);
+  --ivory:       #FAF8FC;   /* page background */
+  --cream:       #F3EFF7;   /* banded sections */
+  --ink:         #2A2633;   /* body text */
+  --shadow-soft: 0 18px 45px rgba(42, 34, 56, .16);
 }
 
 body {
@@ -28,9 +31,9 @@ h1, h2, h3, .serif { font-family: 'Cormorant Garamond', serif; }
 .text-gold       { color: var(--gold) !important; }
 .text-gold-light { color: var(--gold-light) !important; }
 .text-gold-dark  { color: var(--gold-dark) !important; }
-.text-olive-dark { color: var(--olive-dark) !important; }
-.bg-olive        { background: var(--olive) !important; }
-.bg-olive-dark   { background: var(--olive-dark) !important; }
+.text-plum-dark { color: var(--plum-dark) !important; }
+.bg-plum        { background: var(--plum) !important; }
+.bg-plum-dark   { background: var(--plum-dark) !important; }
 .bg-cream        { background: var(--cream) !important; }
 .border-gold     { border-color: var(--gold) !important; }
 
@@ -70,7 +73,7 @@ body.is-locked { overflow: hidden; }
 #intro {
   position: fixed; inset: 0; z-index: 2000;
   display: grid; place-items: center;
-  background: radial-gradient(circle at 50% 42%, #55654f 0%, #3b463a 55%, #2b332a 100%);
+  background: radial-gradient(circle at 50% 42%, #5A4B78 0%, #3E3458 55%, #2B2440 100%);
   transition: opacity .9s ease, visibility .9s ease;
 }
 #intro::before,
@@ -140,11 +143,11 @@ body.is-locked { overflow: hidden; }
   box-shadow: 0 10px 26px rgba(0, 0, 0, .22);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: .35rem; padding: 1rem; text-align: center;
-  color: var(--olive-dark);
+  color: var(--plum-dark);
   transition: transform 1s cubic-bezier(.2, .8, .3, 1), opacity .5s ease;
 }
 .env-letter small { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-dark); }
-.env-letter .initials { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--olive-dark); }
+.env-letter .initials { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--plum-dark); }
 
 .env-seal {
   position: absolute; z-index: 5;
@@ -164,7 +167,7 @@ body.is-locked { overflow: hidden; }
 .env-names {
   font-family: 'Great Vibes', cursive;
   font-size: clamp(1.25rem, 5vw, 1.85rem);
-  color: #2f3a2d;
+  color: #332B45;
   line-height: 1.12;
   max-width: 100%;
   text-wrap: balance;
@@ -205,7 +208,7 @@ body.is-locked { overflow: hidden; }
 }
 #hero::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(42, 52, 40, .72) 0%, rgba(42, 52, 40, .55) 45%, rgba(31, 38, 30, .88) 100%);
+  background: linear-gradient(180deg, rgba(42, 34, 58, .72) 0%, rgba(42, 34, 58, .55) 45%, rgba(32, 26, 45, .88) 100%);
 }
 #hero > .container { position: relative; z-index: 2; }
 
@@ -261,10 +264,10 @@ body.is-locked { overflow: hidden; }
   content: ''; position: absolute; border-radius: 50%; filter: blur(70px); opacity: .5;
 }
 #couple::before { width: 340px; height: 340px; background: rgba(197, 160, 89, .22); top: -60px; left: -80px; }
-#couple::after  { width: 380px; height: 380px; background: rgba(126, 144, 121, .25); bottom: -90px; right: -90px; }
+#couple::after  { width: 380px; height: 380px; background: rgba(134, 120, 163, .28); bottom: -90px; right: -90px; }
 #couple > * { position: relative; z-index: 1; }
 
-.couple-story { max-width: 720px; margin-inline: auto; color: #5c6358; line-height: 1.85; }
+.couple-story { max-width: 720px; margin-inline: auto; color: #5C5569; line-height: 1.85; }
 
 .photo-frame {
   position: relative; border-radius: 180px 180px 16px 16px;
@@ -280,7 +283,7 @@ body.is-locked { overflow: hidden; }
   text-transform: uppercase; letter-spacing: .25em;
   font-size: .64rem; font-weight: 600; color: var(--gold-dark);
 }
-.person-name { font-size: clamp(1.6rem, 4vw, 2.3rem); color: var(--olive-dark); margin: .2rem 0 0; }
+.person-name { font-size: clamp(1.6rem, 4vw, 2.3rem); color: var(--plum-dark); margin: .2rem 0 0; }
 
 .amp-emblem {
   width: 76px; height: 76px; border-radius: 50%; margin-inline: auto;
@@ -309,14 +312,14 @@ body.is-locked { overflow: hidden; }
   position: absolute; top: -26px; left: 50%; transform: translateX(-50%);
   width: 52px; height: 52px; border-radius: 50%;
   display: grid; place-items: center;
-  background: var(--olive); color: var(--gold-light);
+  background: var(--plum); color: var(--gold-light);
   border: 1px solid rgba(197, 160, 89, .6);
 }
 .venue-chapter {
   display: block; text-transform: uppercase; letter-spacing: .28em;
   font-size: .62rem; color: var(--gold-dark); font-weight: 600;
 }
-.venue-title { font-size: 2rem; color: var(--olive-dark); margin: .25rem 0 .1rem; }
+.venue-title { font-size: 2rem; color: var(--plum-dark); margin: .25rem 0 .1rem; }
 .venue-time {
   font-family: 'Cormorant Garamond', serif;
   font-size: 2.6rem; color: var(--gold-dark); line-height: 1;
@@ -328,7 +331,7 @@ body.is-locked { overflow: hidden; }
 .venue-details li { display: flex; gap: .8rem; align-items: flex-start; padding: .6rem 0; border-top: 1px dashed rgba(197, 160, 89, .35); }
 .venue-details li i { color: var(--gold-dark); margin-top: .35rem; width: 18px; text-align: center; }
 .venue-details small { display: block; text-transform: uppercase; letter-spacing: .16em; font-size: .58rem; color: var(--gold-dark); }
-.venue-details span { color: #4b5247; font-size: .92rem; }
+.venue-details span { color: #4C4558; font-size: .92rem; }
 
 .venue-actions { display: grid; gap: .6rem; }
 .venue-route { text-align: center; padding: 1.6rem 0; color: var(--gold-dark); }
@@ -355,7 +358,7 @@ body.is-locked { overflow: hidden; }
   background: #fff;
   padding: 10px 10px 34px;
   border-radius: 4px;
-  box-shadow: 0 14px 34px rgba(42, 46, 40, .22);
+  box-shadow: 0 14px 34px rgba(42, 34, 56, .24);
   cursor: pointer;
   opacity: 0;
   transition: opacity .7s ease, transform .9s cubic-bezier(.2, .8, .3, 1), box-shadow .3s ease;
@@ -363,13 +366,13 @@ body.is-locked { overflow: hidden; }
 }
 .polaroid.is-in { opacity: 1; }
 .polaroid:hover, .polaroid:focus-visible {
-  box-shadow: 0 22px 48px rgba(42, 46, 40, .32);
+  box-shadow: 0 22px 48px rgba(42, 34, 56, .34);
   z-index: 40 !important;
 }
 .polaroid img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; background: var(--cream); }
 .polaroid figcaption {
   font-family: 'Cormorant Garamond', serif;
-  font-size: .82rem; font-style: italic; color: #5c6358;
+  font-size: .82rem; font-style: italic; color: #5C5569;
   text-align: center; padding-top: .5rem;
 }
 
@@ -380,7 +383,7 @@ body.is-locked { overflow: hidden; }
 /* ---------- Lightbox ---------- */
 .lightbox {
   position: fixed; inset: 0; z-index: 1900;
-  background: rgba(24, 29, 23, .94);
+  background: rgba(26, 21, 36, .94);
   display: none; place-items: center;
   padding: 2rem 1rem;
 }
@@ -412,7 +415,7 @@ body.is-locked { overflow: hidden; }
 #audioToggle {
   position: fixed; right: 1.1rem; bottom: 1.1rem; z-index: 1500;
   display: none; align-items: center; gap: .5rem;
-  background: var(--olive-dark); color: var(--gold-light);
+  background: var(--plum-dark); color: var(--gold-light);
   border: 1px solid rgba(197, 160, 89, .6);
   border-radius: 999px; padding: .55rem 1rem;
   font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;

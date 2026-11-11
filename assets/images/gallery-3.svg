@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900" role="img" aria-label="PHOTO 3 placeholder">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#5A6B56"/>
-      <stop offset="0.55" stop-color="#46543F"/>
-      <stop offset="1" stop-color="#36402F"/>
+      <stop offset="0" stop-color="#574A72"/>
+      <stop offset="0.55" stop-color="#423764"/>
+      <stop offset="1" stop-color="#2E2743"/>
     </linearGradient>
     <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
       <path d="M48 0H0V48" fill="none" stroke="#C5A059" stroke-opacity="0.12" stroke-width="1"/>

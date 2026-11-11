@@ -221,11 +221,11 @@
         '</ul>' +
         '<div class="venue-actions">' +
           '<a href="https://maps.google.com/?q=' + encodeURIComponent(ev.mapQuery) + '" target="_blank" rel="noopener" ' +
-            'class="btn btn-sm bg-olive text-gold border-gold rounded-pill w-100 py-2 fw-bold shimmer" ' +
+            'class="btn btn-sm bg-plum text-gold border-gold rounded-pill w-100 py-2 fw-bold shimmer" ' +
             'style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase">' +
             '<i class="fas fa-directions me-1"></i> Get directions</a>' +
           '<div class="dropdown">' +
-            '<button class="btn btn-sm btn-light border-gold text-olive-dark rounded-pill w-100 py-2 fw-bold dropdown-toggle" ' +
+            '<button class="btn btn-sm btn-light border-gold text-plum-dark rounded-pill w-100 py-2 fw-bold dropdown-toggle" ' +
               'type="button" data-bs-toggle="dropdown" style="font-size:.7rem">' +
               '<i class="far fa-calendar-plus me-1 text-gold"></i> Add to calendar</button>' +
             '<ul class="dropdown-menu dropdown-menu-end shadow border-gold w-100">' +
@@ -444,8 +444,12 @@
   const audioIcon = document.getElementById('audioIcon');
   const audioLabel = document.getElementById('audioLabel');
 
+  // Add ?mute to the URL to preview the page without the track starting itself.
+  // The button still works, so music can be turned on by hand.
+  const startSilent = new URLSearchParams(location.search).has('mute');
+
   function startMusic() {
-    if (!INVITE.music || !audioBtn.classList.contains('is-available')) return;
+    if (!INVITE.music || startSilent || !audioBtn.classList.contains('is-available')) return;
     audio.play().then(setPlaying).catch(() => setPaused());  // autoplay may be blocked
   }
   function setPlaying() { audioIcon.className = 'fas fa-pause'; audioLabel.textContent = 'Pause music'; }
