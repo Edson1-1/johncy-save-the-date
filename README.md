@@ -63,23 +63,32 @@ mostly works, but a local server matches how Pages serves it.)
 
 ## 4. Deploy to GitHub Pages
 
-1. Create a repository on GitHub and push this folder to the `main` branch:
+This repo is already live at **https://edson1-1.github.io/johncy-save-the-date/**
 
-   ```bash
-   git remote add origin https://github.com/<you>/<repo>.git
-   git push -u origin main
-   ```
+Pages serves the `gh-pages` branch, and
+[`.github/workflows/publish.yml`](.github/workflows/publish.yml) mirrors `main` onto
+it on every push. So the whole workflow is:
 
-2. That's it. [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) turns Pages
-   on for the repo the first time it runs (`enablement: true`) and publishes the site on
-   every push to `main`. The live URL appears in **Settings → Pages** and on the workflow
-   run, and will be `https://<you>.github.io/<repo>/`.
+```bash
+git add -A && git commit -m "Update the invitation" && git push
+```
 
-   If the first run fails on *Get Pages site failed*, set
-   **Settings → Pages → Build and deployment → Source: GitHub Actions** by hand and re-run it.
+Give it about a minute and the live site updates.
 
-All asset paths are relative, so the site works from a project sub-path
-(`/<repo>/`) as well as from a custom domain.
+### Setting this up on a fresh repo
+
+Creating a `gh-pages` branch switches Pages on by itself, which avoids needing
+repo-admin rights:
+
+```bash
+git push origin main:refs/heads/gh-pages
+```
+
+The alternative — **Settings → Pages → Source: GitHub Actions**, deploying with
+`actions/deploy-pages` — is tidier, but a workflow can't enable Pages on its own
+(`Create Pages site failed: Resource not accessible by integration`), so the first
+switch has to be flipped by hand in the UI. The `gh-pages` route needs no settings
+at all.
 
 ### Custom domain
 Add a file named `CNAME` at the repo root containing just your domain

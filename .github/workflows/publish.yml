@@ -1,0 +1,31 @@
+name: Publish to GitHub Pages
+
+# GitHub Pages for this repo serves the `gh-pages` branch, so publishing is a
+# mirror of `main` onto that branch. (The Pages "GitHub Actions" source needs a
+# one-time switch in Settings -> Pages that only a repo admin can make; this
+# route needs no settings at all.)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      # The site is plain static files at the repo root, so gh-pages is just a
+      # copy of main. Force-push keeps the two exactly in step.
+      - name: Mirror main onto gh-pages
+        run: git push origin HEAD:refs/heads/gh-pages --force
