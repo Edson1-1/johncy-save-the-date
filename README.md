@@ -91,33 +91,26 @@ switch has to be flipped by hand in the UI. The `gh-pages` route needs no settin
 at all.
 
 ### Custom domain
-Add a file named `CNAME` at the repo root containing just your domain
-(e.g. `wedding.example.com`), then point a CNAME DNS record at `<you>.github.io`.
 
-## Structure
+The site is served at **https://johncywedsnithya.com** via the `CNAME` file at the
+repo root.
+
+That file must stay on `main`. The Pages "Custom domain" field in repo settings
+writes a `CNAME` onto the `gh-pages` branch instead, and this repo's workflow
+force-pushes `main` over `gh-pages` on every push — so a `CNAME` written that way
+is wiped by the next commit.
+
+DNS at the registrar (Squarespace) is four A records on `@`:
 
 ```
-index.html              markup
-assets/css/style.css    theme — olive & gold palette lives in :root
-assets/js/config.js     ← all the content
-assets/js/main.js       behaviour (countdown, gallery, calendar, share)
-assets/images/          image placeholders
-.github/workflows/      GitHub Pages deployment
-.nojekyll               tells Pages to serve files as-is
+185.199.108.153   185.199.109.153   185.199.110.153   185.199.111.153
 ```
 
-## Changing the colours
+plus a CNAME on `www` to `edson1-1.github.io`.
 
-Every colour is a CSS variable at the top of `assets/css/style.css`:
+### Link previews
 
-```css
-:root {
-  --olive-dark: #3F4A3C;
-  --olive:      #5A6B56;
-  --gold:       #C5A059;
-  --cream:      #F4EFE6;
-  ...
-}
-```
-
-Swap those five or six values and the whole invitation re-themes.
+The `og:` tags in `index.html` are written out in full rather than filled in by
+`main.js`, because WhatsApp and other crawlers don't run JavaScript. **If the
+names or date change in `config.js`, update the `<head>` of `index.html` too** —
+otherwise shared links keep showing the old details.
