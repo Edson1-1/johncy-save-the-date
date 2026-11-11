@@ -13,14 +13,14 @@ const INVITE = {
     shortName: 'Johncy',
     initial: 'J',
     role: 'The Groom',
-    photo: 'assets/images/groom.svg'          // PLACEHOLDER — portrait, ~800x1000
+    photo: 'assets/images/groom.jpg'          // portrait of Johncy
   },
   bride: {
     name: 'Nithya',
     shortName: 'Nithya',
     initial: 'N',
     role: 'The Bride',
-    photo: 'assets/images/bride.svg'          // PLACEHOLDER — portrait, ~800x1000
+    photo: 'assets/images/bride.jpg'          // portrait of Nithya
   },
 
   /* ---------- Date & time ---------- */
@@ -50,11 +50,13 @@ const INVITE = {
   hashtag: '#JohncyWedsNithya',
 
   /* ---------- Images ---------- */
-  heroImage: 'assets/images/hero.svg',        // PLACEHOLDER — wide banner, ~1920x1280
+  // The banner reuses photo-1 — there are 5 image slots and 4 photos. Point this
+  // at its own file if you add a fifth.
+  heroImage: 'assets/images/photo-1.jpg',
 
   /* ---------- Background music (optional) ---------- */
   // Drop an .mp3 in assets/audio/ and put the path here. Leave '' to hide the player.
-  music: '',
+  music: 'assets/audio/song.mp3',
 
   /* ---------- The events ---------- */
   events: [
@@ -91,12 +93,8 @@ const INVITE = {
   /* ---------- Gallery ---------- */
   // Add or remove freely — the scatter layout adapts.
   gallery: [
-    { src: 'assets/images/gallery-1.svg', caption: 'A Look That Says Forever' },
-    { src: 'assets/images/gallery-2.svg', caption: 'Wrapped in Love' },
-    { src: 'assets/images/gallery-3.svg', caption: 'Side by Side' },
-    { src: 'assets/images/gallery-4.svg', caption: 'Our Beautiful Beginning' },
-    { src: 'assets/images/gallery-5.svg', caption: 'One Step Closer' },
-    { src: 'assets/images/gallery-6.svg', caption: 'Happily Ever After' }
+    { src: 'assets/images/photo-1.jpg', caption: 'A Look That Says Forever' },
+    { src: 'assets/images/photo-2.jpg', caption: 'Side by Side' }
   ],
 
   /* ---------- Credit line in the footer ---------- */

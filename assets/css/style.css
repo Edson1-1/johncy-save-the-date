@@ -345,7 +345,7 @@ body.is-locked { overflow: hidden; }
 .scatter-board {
   position: relative;
   max-width: 1120px; margin: 2.5rem auto 0;
-  height: 620px;
+  height: 620px;          /* fallback; main.js sets this from the photo count */
 }
 .polaroid {
   position: absolute;
@@ -372,7 +372,6 @@ body.is-locked { overflow: hidden; }
 }
 
 @media (max-width: 767px) {
-  .scatter-board { height: 900px; }
   .polaroid { width: 43vw; max-width: 190px; padding: 8px 8px 28px; }
 }
 

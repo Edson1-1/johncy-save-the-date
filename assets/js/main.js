@@ -38,11 +38,27 @@
     el.getAttribute('data-inv-attr').split(',').forEach(pair => {
       const [attr, path] = pair.split('|');
       const value = get(path.trim());
+      if (attr.trim() === 'src' && el.tagName === 'IMG') {
+        withFallback(el, 'assets/images/' + path.trim().split('.')[0] + '.svg');
+      }
       if (value != null) el.setAttribute(attr.trim(), value);
     });
   });
 
-  document.getElementById('hero').style.backgroundImage = "url('" + INVITE.heroImage + "')";
+  // Any photo that is missing or misnamed falls back to its placeholder, so the
+  // page never shows a broken image while the real files are still being added.
+  function withFallback(img, placeholder) {
+    img.addEventListener('error', () => {
+      if (!img.src.endsWith(placeholder)) img.src = placeholder;
+    }, { once: true });
+  }
+
+  const heroEl = document.getElementById('hero');
+  const setHero = src => heroEl.style.backgroundImage = "url('" + src + "')";
+  const heroProbe = new Image();
+  heroProbe.onload = () => setHero(INVITE.heroImage);
+  heroProbe.onerror = () => setHero('assets/images/hero.svg');
+  heroProbe.src = INVITE.heroImage;
 
   // step the envelope signature down a size when the two names are long
   document.querySelectorAll('.env-names').forEach(el => {
@@ -211,19 +227,32 @@
   const board = document.getElementById('scatterBoard');
   const photos = INVITE.gallery;
 
-  // Positions in % of the board, plus a tilt. Reused cyclically for longer galleries.
-  const layouts = {
-    desktop: [
-      { x: 17, y: 28, r: -8 }, { x: 50, y: 23, r: 4 },  { x: 83, y: 29, r: -5 },
-      { x: 24, y: 72, r: 6 },  { x: 53, y: 70, r: -3 }, { x: 80, y: 74, r: 7 }
-    ],
-    mobile: [
-      { x: 29, y: 13, r: -6 }, { x: 71, y: 24, r: 6 },
-      { x: 30, y: 45, r: 4 },  { x: 70, y: 56, r: -6 },
-      { x: 29, y: 77, r: -3 }, { x: 71, y: 88, r: 5 }
-    ]
-  };
+  // Positions are generated from the photo count, so the collage looks right with
+  // two photos or with ten. Tilts come from a fixed list, so the scatter is random
+  // to look at but identical on every load and every resize.
+  const TILTS = [-8, 5, -5, 6, -3, 7, -6, 4];
   const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
+
+  function layout() {
+    const mobile = isMobile();
+    const count = cards.length;
+    const perRow = Math.min(mobile ? 2 : 3, count);
+    const rows = Math.ceil(count / perRow);
+    const spots = [];
+
+    for (let i = 0; i < count; i++) {
+      const row = Math.floor(i / perRow);
+      const col = i % perRow;
+      const inThisRow = Math.min(perRow, count - row * perRow);
+      spots.push({
+        x: ((col + 1) / (inThisRow + 1)) * 100,
+        // push alternate cards off the row line so they overlap a little
+        y: ((row + 0.5) / rows) * 100 + (col % 2 ? 3 : -3),
+        r: TILTS[i % TILTS.length]
+      });
+    }
+    return { spots, rows, rowHeight: mobile ? 290 : 310 };
+  }
 
   const cards = photos.map((photo, i) => {
     const card = document.createElement('figure');
@@ -232,9 +261,16 @@
     card.setAttribute('role', 'button');
     card.setAttribute('aria-label', 'View photo: ' + photo.caption);
     card.style.zIndex = String(10 + i);
-    card.innerHTML =
-      '<img src="' + esc(photo.src) + '" alt="' + esc(photo.caption) + '" loading="lazy" decoding="async">' +
-      '<figcaption>' + esc(photo.caption) + '</figcaption>';
+    const img = document.createElement('img');
+    img.alt = photo.caption;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    withFallback(img, 'assets/images/gallery-' + ((i % 6) + 1) + '.svg');
+    img.src = photo.src;
+
+    const cap = document.createElement('figcaption');
+    cap.textContent = photo.caption;
+    card.append(img, cap);
     card.addEventListener('click', () => openLightbox(i));
     card.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); }
@@ -244,15 +280,12 @@
   });
 
   function placeCards(animated) {
-    const set = isMobile() ? layouts.mobile : layouts.desktop;
+    const { spots, rows, rowHeight } = layout();
+    board.style.height = (rows * rowHeight) + 'px';
     cards.forEach((card, i) => {
-      const spot = set[i % set.length];
-      // nudge repeats so a 7th+ photo does not land exactly on the 1st
-      const lap = Math.floor(i / set.length);
-      const x = spot.x + lap * 4;
-      const y = spot.y + lap * 3;
-      card.style.left = x + '%';
-      card.style.top = y + '%';
+      const spot = spots[i];
+      card.style.left = spot.x + '%';
+      card.style.top = spot.y + '%';
       card.style.transform = 'translate(-50%,-50%) rotate(' + spot.r + 'deg) scale(' +
         (animated ? 1 : 0.6) + ')';
     });
@@ -290,6 +323,7 @@
   }
   function show(i) {
     lbIndex = (i + photos.length) % photos.length;
+    withFallback(lbImg, 'assets/images/gallery-' + ((lbIndex % 6) + 1) + '.svg');
     lbImg.src = photos[lbIndex].src;
     lbImg.alt = photos[lbIndex].caption;
     lbCaption.textContent = photos[lbIndex].caption;
@@ -349,15 +383,19 @@
   const audioLabel = document.getElementById('audioLabel');
 
   function startMusic() {
-    if (!INVITE.music) return;
+    if (!INVITE.music || !audioBtn.classList.contains('is-available')) return;
     audio.play().then(setPlaying).catch(() => setPaused());  // autoplay may be blocked
   }
   function setPlaying() { audioIcon.className = 'fas fa-pause'; audioLabel.textContent = 'Pause music'; }
   function setPaused()  { audioIcon.className = 'fas fa-music'; audioLabel.textContent = 'Play music'; }
 
   if (INVITE.music) {
+    // Only offer the player once the track has actually loaded, so a missing or
+    // misnamed file leaves no dead button on the page.
+    audio.preload = 'metadata';
     audio.src = INVITE.music;
-    audioBtn.classList.add('is-available');
+    audio.addEventListener('loadedmetadata', () => audioBtn.classList.add('is-available'), { once: true });
+    audio.addEventListener('error', () => audioBtn.classList.remove('is-available'), { once: true });
     audioBtn.addEventListener('click', () => {
       if (audio.paused) { audio.play().then(setPlaying).catch(setPaused); }
       else { audio.pause(); setPaused(); }
