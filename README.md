@@ -70,11 +70,13 @@ mostly works, but a local server matches how Pages serves it.)
    git push -u origin main
    ```
 
-2. In the repository: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. That's it. [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) turns Pages
+   on for the repo the first time it runs (`enablement: true`) and publishes the site on
+   every push to `main`. The live URL appears in **Settings → Pages** and on the workflow
+   run, and will be `https://<you>.github.io/<repo>/`.
 
-3. That's it. [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) publishes
-   the site on every push to `main`. The live URL appears in **Settings → Pages** and
-   on the workflow run, and will be `https://<you>.github.io/<repo>/`.
+   If the first run fails on *Get Pages site failed*, set
+   **Settings → Pages → Build and deployment → Source: GitHub Actions** by hand and re-run it.
 
 All asset paths are relative, so the site works from a project sub-path
 (`/<repo>/`) as well as from a custom domain.
