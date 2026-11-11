@@ -9,16 +9,16 @@ const INVITE = {
 
   /* ---------- The couple ---------- */
   groom: {
-    name: 'GROOM NAME',
-    shortName: 'Groom',
-    initial: 'G',
+    name: 'Johncy',
+    shortName: 'Johncy',
+    initial: 'J',
     role: 'The Groom',
     photo: 'assets/images/groom.svg'          // PLACEHOLDER — portrait, ~800x1000
   },
   bride: {
-    name: 'BRIDE NAME',
-    shortName: 'Bride',
-    initial: 'B',
+    name: 'Nithya',
+    shortName: 'Nithya',
+    initial: 'N',
     role: 'The Bride',
     photo: 'assets/images/bride.svg'          // PLACEHOLDER — portrait, ~800x1000
   },
@@ -30,10 +30,10 @@ const INVITE = {
   utcOffset: '+05:30',
 
   // ISO date-time of the ceremony. Drives the countdown.
-  dateISO: '2027-01-14T11:00:00',
-  dateLong: 'Thursday, January 14th, 2027',
-  dateShort: '14 January 2027',
-  dateUpper: 'THURSDAY, JANUARY 14, 2027',
+  dateISO: '2026-12-27T11:00:00',   // TODO: confirm the ceremony time
+  dateLong: 'Sunday, December 27th, 2026',
+  dateShort: '27 December 2026',
+  dateUpper: 'SUNDAY, DECEMBER 27, 2026',
   timeDisplay: '11:00 AM',
 
   /* ---------- Words ---------- */
@@ -47,7 +47,7 @@ const INVITE = {
          'to take the next step together.',
   thankYouNote: '"With love in our hearts, we thank you for your blessings, prayers and constant ' +
                 'support as we celebrate our forever."',
-  hashtag: '#GroomWedsBride',
+  hashtag: '#JohncyWedsNithya',
 
   /* ---------- Images ---------- */
   heroImage: 'assets/images/hero.svg',        // PLACEHOLDER — wide banner, ~1920x1280
@@ -69,8 +69,8 @@ const INVITE = {
       venueName: 'VENUE NAME, Street / Town, District',
       mapQuery: 'VENUE NAME Town District',       // used for the Google Maps link
       calendarTitle: 'Wedding Ceremony',
-      calStart: '2027-01-14T11:00:00',
-      calEnd: '2027-01-14T13:00:00'
+      calStart: '2026-12-27T11:00:00',
+      calEnd: '2026-12-27T13:00:00'
     },
     {
       chapter: 'Chapter II',
@@ -83,8 +83,8 @@ const INVITE = {
       venueName: 'RECEPTION HALL NAME, Town',
       mapQuery: 'RECEPTION HALL NAME Town',
       calendarTitle: 'Wedding Reception',
-      calStart: '2027-01-14T13:00:00',
-      calEnd: '2027-01-14T17:00:00'
+      calStart: '2026-12-27T13:00:00',
+      calEnd: '2026-12-27T17:00:00'
     }
   ],
 
