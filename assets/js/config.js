@@ -13,15 +13,20 @@ const INVITE = {
     shortName: 'Johncy',
     initial: 'J',
     role: 'The Groom',
-    photo: 'assets/images/groom.jpg'          // portrait of Johncy
+    photo: 'assets/images/groom.jpg'          // only used if couplePhoto is '' below
   },
   bride: {
     name: 'Nithya',
     shortName: 'Nithya',
     initial: 'N',
     role: 'The Bride',
-    photo: 'assets/images/bride.jpg'          // portrait of Nithya
+    photo: 'assets/images/bride.jpg'          // only used if couplePhoto is '' below
   },
+
+  // The "Meet..." section shows ONE photo of the two of you when this is set.
+  // Clear it ('') to show a portrait each instead, using groom.photo and
+  // bride.photo above — that needs a solo photo of each of you.
+  couplePhoto: 'assets/images/img1.jpeg',
 
   /* ---------- Date & time ---------- */
   // The wedding's own time zone, as a UTC offset. India +05:30, UK +00:00,
@@ -50,13 +55,11 @@ const INVITE = {
   hashtag: '#JohncyWedsNithya',
 
   /* ---------- Images ---------- */
-  // The banner reuses photo-1 — there are 5 image slots and 4 photos. Point this
-  // at its own file if you add a fifth.
-  heroImage: 'assets/images/photo-1.jpg',
+  heroImage: 'assets/images/Hero.jpeg',
 
   /* ---------- Background music (optional) ---------- */
   // Drop an .mp3 in assets/audio/ and put the path here. Leave '' to hide the player.
-  music: 'assets/audio/song.mp3',
+  music: 'assets/audio/ramba_ho_ho_ho.mp3',
 
   /* ---------- The events ---------- */
   events: [
@@ -93,8 +96,8 @@ const INVITE = {
   /* ---------- Gallery ---------- */
   // Add or remove freely — the scatter layout adapts.
   gallery: [
-    { src: 'assets/images/photo-1.jpg', caption: 'A Look That Says Forever' },
-    { src: 'assets/images/photo-2.jpg', caption: 'Side by Side' }
+    { src: 'assets/images/img2.jpeg', caption: 'Side by Side' },
+    { src: 'assets/images/img3.jpeg', caption: 'Happily Ever After' }
   ],
 
   /* ---------- Credit line in the footer ---------- */

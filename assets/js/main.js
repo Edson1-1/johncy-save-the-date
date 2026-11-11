@@ -73,6 +73,68 @@
   }
 
   /* ============================================================
+     Couple photos — one shared photo, or a portrait each
+     ============================================================ */
+  (function buildCouplePhotos() {
+    const host = document.getElementById('couplePhotos');
+
+    const frame = (src, placeholder, alt) => {
+      const wrap = document.createElement('div');
+      wrap.className = INVITE.couplePhoto
+        ? 'col-10 col-sm-8 col-md-6 col-lg-5 reveal'
+        : 'col-10 col-sm-7 col-md-4 reveal';
+      const box = document.createElement('div');
+      box.className = 'photo-frame';
+      const img = document.createElement('img');
+      img.alt = alt;
+      img.loading = 'lazy';
+      withFallback(img, placeholder);
+      img.src = src;
+      box.appendChild(img);
+      wrap.appendChild(box);
+      return { wrap, box };
+    };
+
+    const caption = (role, name) => {
+      const el = document.createElement('div');
+      el.className = 'text-center mt-3';
+      el.innerHTML = '<div class="person-role"></div><h3 class="person-name serif"></h3>';
+      el.querySelector('.person-role').textContent = role;
+      el.querySelector('.person-name').textContent = name;
+      return el;
+    };
+
+    // A single photo of the two of them: one frame, no duplicated names — the
+    // section heading above already introduces them.
+    if (INVITE.couplePhoto) {
+      const { wrap } = frame(INVITE.couplePhoto, 'assets/images/hero.svg',
+        INVITE.groom.name + ' and ' + INVITE.bride.name);
+      const emblem = document.createElement('div');
+      emblem.className = 'amp-emblem mt-4';
+      emblem.textContent = '&';
+      wrap.appendChild(emblem);
+      host.appendChild(wrap);
+      return;
+    }
+
+    // Otherwise a portrait each, with the ampersand between them.
+    const groom = frame(INVITE.groom.photo, 'assets/images/groom.svg', INVITE.groom.role);
+    groom.wrap.appendChild(caption(INVITE.groom.role, INVITE.groom.name));
+
+    const middle = document.createElement('div');
+    middle.className = 'col-12 col-md-1 d-flex justify-content-center reveal';
+    const emblem = document.createElement('div');
+    emblem.className = 'amp-emblem';
+    emblem.textContent = '&';
+    middle.appendChild(emblem);
+
+    const bride = frame(INVITE.bride.photo, 'assets/images/bride.svg', INVITE.bride.role);
+    bride.wrap.appendChild(caption(INVITE.bride.role, INVITE.bride.name));
+
+    host.append(groom.wrap, middle, bride.wrap);
+  })();
+
+  /* ============================================================
      Envelope intro
      ============================================================ */
   const intro = document.getElementById('intro');
