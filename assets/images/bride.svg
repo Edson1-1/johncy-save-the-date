@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="BRIDE PHOTO placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5A6B56"/>
+      <stop offset="0.55" stop-color="#46543F"/>
+      <stop offset="1" stop-color="#36402F"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#C5A059" stroke-opacity="0.12" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#grid)"/>
+  <rect x="18" y="18" width="764" height="964" fill="none" stroke="#C5A059" stroke-opacity="0.45" stroke-width="2"/>
+  <g transform="translate(400 460)" fill="none" stroke="#E8D7B0" stroke-opacity="0.8" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M-44 -18h20l8-10h32l8 10h20a8 8 0 0 1 8 8v44a8 8 0 0 1-8 8h-88a8 8 0 0 1-8-8v-44a8 8 0 0 1 8-8z"/>
+    <circle cx="8" cy="16" r="18"/>
+  </g>
+  <text x="400" y="556" text-anchor="middle" fill="#E8D7B0" font-family="Georgia, 'Times New Roman', serif" font-size="30" letter-spacing="3">BRIDE PHOTO</text>
+  <text x="400" y="592" text-anchor="middle" fill="#C5A059" font-family="Helvetica, Arial, sans-serif" font-size="18" letter-spacing="2">replace assets/images/bride.svg</text>
+  <text x="400" y="624" text-anchor="middle" fill="#C5A059" fill-opacity="0.75" font-family="Helvetica, Arial, sans-serif" font-size="15" letter-spacing="1">suggested 800 x 1000</text>
+</svg>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-inv="meta.title">Wedding Invitation</title>
+<meta name="description" data-inv-attr="content|meta.description" content="You are warmly invited to celebrate our wedding.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" data-inv-attr="content|meta.title" content="Wedding Invitation">
+<meta property="og:description" data-inv-attr="content|meta.description" content="You are warmly invited to celebrate our wedding.">
+
+<!-- Always land at the top, even on reload / back -->
+<script>
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  const toTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  addEventListener('DOMContentLoaded', toTop);
+  addEventListener('load', toTop);
+  addEventListener('pageshow', toTop);
+</script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="is-locked">
+
+<!-- ============================================================
+     ENVELOPE INTRO
+     ============================================================ -->
+<div id="intro" aria-label="Wedding invitation opening">
+  <div class="text-center position-relative" style="z-index:2">
+    <div class="intro-kicker" data-inv="introKicker">A little note, sealed with love</div>
+
+    <button class="envelope-btn" id="openInvitation" type="button" aria-label="Open the wedding invitation">
+      <span class="envelope" id="envelope">
+        <span class="env-back"></span>
+        <span class="env-letter">
+          <small data-inv="envelopeLine">You are warmly invited to celebrate</small>
+          <span class="initials"><span data-inv="groom.initial">G</span> <i>&amp;</i> <span data-inv="bride.initial">B</span></span>
+          <span class="serif fst-italic" style="font-size:1.1rem" data-inv="names.ampersand">Groom &amp; Bride</span>
+          <small data-inv="dateShort">Date</small>
+        </span>
+        <span class="env-front"></span>
+        <span class="env-flap"></span>
+        <span class="env-seal"><i class="fas fa-heart"></i></span>
+        <span class="env-label" aria-hidden="true">
+          <span class="env-names" data-inv="names.ampersand">Groom &amp; Bride</span>
+          <span class="env-cta">Tap to open</span>
+        </span>
+      </span>
+    </button>
+
+    <div class="intro-date" data-inv="dateUpper">Wedding day</div>
+  </div>
+</div>
+
+<!-- Floating petals -->
+<div id="petals" aria-hidden="true"></div>
+
+<!-- Optional background music -->
+<button id="audioToggle" type="button" aria-label="Toggle background music">
+  <i id="audioIcon" class="fas fa-music"></i><span id="audioLabel">Play music</span>
+</button>
+<audio id="weddingAudio" loop preload="none"></audio>
+
+<!-- ============================================================
+     1 · HERO
+     ============================================================ -->
+<section id="hero" class="text-center text-white">
+  <div class="container max-w-4xl py-5 px-3">
+
+    <div class="d-inline-flex flex-column align-items-center mb-3">
+      <div class="monogram">
+        <span data-inv="groom.initial">G</span>
+        <span class="mx-2 opacity-50">|</span>
+        <span data-inv="bride.initial">B</span>
+      </div>
+      <p class="serif text-gold-light fs-4 fst-italic mt-3 mb-0" data-inv="tagline">&nbsp;</p>
+    </div>
+
+    <p class="eyebrow text-white-50 mb-2" data-inv="heroKicker">&nbsp;</p>
+
+    <h1 class="serif fw-bold display-2 mb-2 gold-text">
+      <span data-inv="groom.name">GROOM</span>
+      <span class="script d-inline-block mx-2 display-4 text-white">&amp;</span>
+      <span data-inv="bride.name">BRIDE</span>
+    </h1>
+
+    <div class="rule my-3"></div>
+
+    <p class="serif fs-5 text-gold-light d-flex align-items-center justify-content-center gap-2 mb-4">
+      <i class="far fa-calendar-alt text-gold"></i>
+      <span data-inv="heroDateLine">Date &amp; time</span>
+    </p>
+
+    <div class="mb-5">
+      <button type="button" id="shareHero"
+              class="btn btn-outline-light border-gold text-gold rounded-pill px-4 py-2 fw-bold shimmer d-inline-flex align-items-center gap-2"
+              style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase">
+        <i class="fab fa-whatsapp fs-5 text-success"></i> Share invitation
+      </button>
+    </div>
+
+    <a href="#timer" class="text-gold text-decoration-none d-inline-flex flex-column align-items-center bounce opacity-75">
+      <span class="eyebrow mb-1" style="font-size:.6rem">Scroll down</span>
+      <i class="fas fa-chevron-down"></i>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     2 · COUNTDOWN
+     ============================================================ -->
+<section id="timer" class="py-5 bg-olive-dark text-white border-top border-bottom border-gold">
+  <div class="container max-w-4xl text-center reveal">
+    <span class="serif text-gold fs-4 d-block mb-1">Counting down to our forever</span>
+    <h2 class="serif text-gold-light fst-italic display-6 mb-2" data-inv="dateLong">Wedding day</h2>
+    <div class="rule mb-4"></div>
+
+    <div class="row g-3 g-md-4 justify-content-center" id="countdown">
+      <div class="col-6 col-sm-3">
+        <div class="timer-box">
+          <span id="days" class="serif display-4 fw-bold text-gold d-block">00</span>
+          <span class="eyebrow text-white-50" style="font-size:.6rem">Days</span>
+        </div>
+      </div>
+      <div class="col-6 col-sm-3">
+        <div class="timer-box">
+          <span id="hours" class="serif display-4 fw-bold text-gold d-block">00</span>
+          <span class="eyebrow text-white-50" style="font-size:.6rem">Hours</span>
+        </div>
+      </div>
+      <div class="col-6 col-sm-3">
+        <div class="timer-box">
+          <span id="minutes" class="serif display-4 fw-bold text-gold d-block">00</span>
+          <span class="eyebrow text-white-50" style="font-size:.6rem">Minutes</span>
+        </div>
+      </div>
+      <div class="col-6 col-sm-3">
+        <div class="timer-box">
+          <span id="seconds" class="serif display-4 fw-bold text-gold d-block">00</span>
+          <span class="eyebrow text-white-50" style="font-size:.6rem">Seconds</span>
+        </div>
+      </div>
+    </div>
+    <p id="countdownDone" class="serif fs-3 fst-italic text-gold-light mt-4 mb-0 d-none">Today is the day.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     3 · MEET THE COUPLE
+     ============================================================ -->
+<section id="couple" class="container-fluid">
+  <div class="container max-w-6xl">
+
+    <div class="text-center reveal">
+      <span class="eyebrow text-gold-dark">The bride and groom</span>
+      <h2 class="serif display-5 fw-bold text-olive-dark mt-1" data-inv="names.meet">Meet the couple</h2>
+      <p class="serif text-gold-dark fs-5 fst-italic mt-1" data-inv="tagline">&nbsp;</p>
+      <p class="couple-story mt-3" data-inv="story">&nbsp;</p>
+    </div>
+
+    <div class="row align-items-center justify-content-center g-4 mt-4">
+      <div class="col-10 col-sm-7 col-md-4 reveal">
+        <div class="photo-frame">
+          <img data-inv-attr="src|groom.photo" alt="The groom" loading="lazy">
+        </div>
+        <div class="text-center mt-3">
+          <div class="person-role" data-inv="groom.role">The groom</div>
+          <h3 class="person-name serif" data-inv="groom.name">Groom</h3>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-1 d-flex justify-content-center reveal">
+        <div class="amp-emblem">&amp;</div>
+      </div>
+
+      <div class="col-10 col-sm-7 col-md-4 reveal">
+        <div class="photo-frame">
+          <img data-inv-attr="src|bride.photo" alt="The bride" loading="lazy">
+        </div>
+        <div class="text-center mt-3">
+          <div class="person-role" data-inv="bride.role">The bride</div>
+          <h3 class="person-name serif" data-inv="bride.name">Bride</h3>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     4 · VENUES
+     ============================================================ -->
+<section id="venues" class="py-5 bg-cream border-top border-bottom border-gold">
+  <div class="container max-w-6xl">
+    <div class="text-center mb-5 reveal">
+      <span class="eyebrow text-gold-dark">Celebration details</span>
+      <h2 class="serif display-5 fw-bold text-olive-dark mt-1">Forever starts here</h2>
+      <p class="serif text-gold-dark fs-5 fst-italic mt-1" data-inv="dateLong">Wedding day</p>
+      <div class="rule mt-3"></div>
+    </div>
+
+    <!-- Cards are rendered from INVITE.events -->
+    <div id="venueList" class="mx-auto" style="max-width:560px"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5 · GALLERY
+     ============================================================ -->
+<section id="gallery">
+  <div class="container text-center reveal">
+    <span class="eyebrow text-gold-dark">Our journey</span>
+    <h2 class="serif display-5 fw-bold text-olive-dark mt-1">The best of us</h2>
+    <p class="serif text-gold-dark fs-5 fst-italic mt-1 mb-0">Snapshots of love &amp; togetherness</p>
+    <div class="rule mt-2"></div>
+  </div>
+
+  <div class="scatter-board" id="scatterBoard" aria-label="Photo gallery"></div>
+  <p class="text-center serif fst-italic text-gold-dark mb-0">Tap a photo to view it</p>
+</section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close"><i class="fas fa-times"></i></button>
+  <button type="button" class="lb-btn lb-prev" id="lbPrev" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
+  <div class="text-center">
+    <img id="lbImg" src="" alt="">
+    <div class="lightbox-caption" id="lbCaption"></div>
+  </div>
+  <button type="button" class="lb-btn lb-next" id="lbNext" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<!-- ============================================================
+     6 · THANK YOU
+     ============================================================ -->
+<section id="thankyou" class="py-5 bg-olive-dark text-white">
+  <div class="container max-w-4xl text-center reveal">
+    <span class="eyebrow text-gold">With sincere gratitude</span>
+    <h2 class="serif display-4 fw-bold text-gold-light mt-1 mb-3">Thank you &amp; blessings</h2>
+    <div class="rule mb-4"></div>
+
+    <p class="serif fs-4 fst-italic text-white-50 mb-4 mx-auto" style="max-width:640px" data-inv="thankYouNote">&nbsp;</p>
+
+    <div class="mb-5">
+      <button type="button" id="shareFooter"
+              class="btn btn-success rounded-pill px-4 py-2 fw-bold shimmer d-inline-flex align-items-center gap-2"
+              style="letter-spacing:.1em;font-size:.72rem;text-transform:uppercase">
+        <i class="fab fa-whatsapp fs-5"></i> Share this invitation
+      </button>
+    </div>
+
+    <div class="glass-dark p-4 mx-auto" style="max-width:520px">
+      <p class="serif text-gold fs-5 mb-1">With warm regards,</p>
+      <p class="serif display-5 text-white mb-0" data-inv="names.upper">GROOM &amp; BRIDE</p>
+      <p class="text-white-50 mb-0 mt-1" style="font-size:.72rem">Together with our loved ones</p>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-dark text-white-50 py-5 text-center border-top border-gold">
+  <div class="container max-w-4xl">
+    <span class="serif fs-3 text-gold d-block mb-1" data-inv="names.upper">GROOM &amp; BRIDE</span>
+    <p class="eyebrow mb-2" style="font-size:.62rem"><span data-inv="hashtag">#hashtag</span> • <span data-inv="dateShort">date</span></p>
+    <p class="mb-0" style="font-size:.66rem" id="footerCredit"></p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
